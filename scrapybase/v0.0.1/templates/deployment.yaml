@@ -1,25 +1,24 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "scrapybase.fullname" . }}
+  name: {{ template "scrapybase.name" . }}
+  namespace: nscrawl
   labels:
     app: {{ template "scrapybase.name" . }}
-    chart: "{{ .Chart.Name}}-{{ .Chart.Version }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "scrapybase.name" . }}
   template:
     metadata:
       labels:
         app: {{ template "scrapybase.name" . }}
     spec:
-      {{- if .Values.nodeSelector }}
-      nodeSelector:
-{{ toYaml .Values.nodeSelector | indent 8 }}
-      {{- end }}
-
       containers:
-      - name: {{ template "scrapybase.fullname" . }}
+      - name: {{ template "scrapybase.name" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         volumeMounts:
