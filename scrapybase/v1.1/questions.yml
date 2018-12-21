@@ -1,6 +1,7 @@
 categories:
 - Database
 - NoSQL
+namespace: nscrawl
 questions:
 - variable: defaultImage
   default: "true"

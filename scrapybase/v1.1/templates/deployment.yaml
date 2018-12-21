@@ -16,6 +16,7 @@ spec:
     metadata:
       labels:
         app: {{ template "scrapybase.name" . }}
+      namespace: nscrawl
     spec:
       containers:
       - name: {{ template "scrapybase.name" . }}
