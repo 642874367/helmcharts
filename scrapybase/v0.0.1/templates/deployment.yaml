@@ -2,7 +2,6 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: {{ template "scrapybase.fullname" . }}
-  namespace: {{ .Values.image.nameSpace }}
   labels:
     app: {{ template "scrapybase.name" . }}
     chart: "{{ .Chart.Name}}-{{ .Chart.Version }}"

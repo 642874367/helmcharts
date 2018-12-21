@@ -7,7 +7,7 @@ questions:
   description: "Use default Docker images"
   label: Use Default Images
   type: boolean
-  show_subquestion_if: true
+  show_subquestion_if: false
   group: "Container Images"
   subquestions:
   - variable: image.repository
@@ -21,3 +21,22 @@ questions:
     type: string
     label: ImaScrapybasege Tag
 
+- variable: persistence.mountPath
+  default: "/app"
+  description: "Nfs mount path"
+  type: string
+  group: "NFS Settings"
+  required: true
+  label: NFS MountPath Path
+  show_subquestion_if: "/app"
+  subquestions:
+  - variable: persistence.mountName
+    default: ""
+    description: "ProjectName"
+    type: string
+    required: true
+  - variable: persistence.claimName
+    default: "crawlappclaim"
+    description: "nfs claim"
+    type: string
+    required: true
