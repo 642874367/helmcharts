@@ -1,0 +1,35 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "scrapybase.fullname" . }}
+  namespace: {{ .Values.image.nameSpace }}
+  labels:
+    app: {{ template "scrapybase.name" . }}
+    chart: "{{ .Chart.Name}}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "scrapybase.name" . }}
+    spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
+
+      containers:
+      - name: {{ template "scrapybase.fullname" . }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        volumeMounts:
+        - mountPath: {{ .Values.persistence.mountPath }}
+          name: {{ .Values.persistence.mountName}}
+          subPath: {{ .Values.persistence.mountName}}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      volumes:
+      - name: {{ .Values.persistence.mountName}}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.claimName}}
