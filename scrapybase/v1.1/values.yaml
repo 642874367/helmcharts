@@ -11,7 +11,7 @@ image:
 
 persistence:
   mountPath: /app
-  mountName: xdfcampus
+  mountName: demo
   claimName: crawlappclaim
 
 ## Configure resource requests and limits
