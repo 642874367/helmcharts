@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "scrapybase.name" . }}
+  name: {{ template "scrapybase.fullname" . }}
   namespace: nscrawl
   labels:
     app: {{ template "scrapybase.name" . }}
@@ -19,7 +19,7 @@ spec:
       namespace: nscrawl
     spec:
       containers:
-      - name: {{ template "scrapybase.name" . }}
+      - name: {{ template "scrapybase.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         volumeMounts:
