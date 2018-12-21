@@ -1,0 +1,42 @@
+categories:
+- Database
+- NoSQL
+questions:
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker images"
+  label: Use Default Images
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  - variable: image.repository
+    default: "reg.bcc-agi.local/library/alpine-crawlbase"
+    description: "scrapybase image name"
+    type: string
+    label: Scrapybase Image Name
+  - variable: image.tag
+    default: "scrapy0.2_20181220"
+    description: "Scrapybase image tag"
+    type: string
+    label: ImaScrapybasege Tag
+
+- variable: persistence.mountPath
+  default: "/app"
+  description: "Nfs mount path"
+  type: string
+  group: "NFS Settings"
+  required: true
+  label: NFS MountPath Path
+  show_subquestion_if: "/app"
+  subquestions:
+  - variable: persistence.mountName
+    default: ""
+    description: "ProjectName"
+    type: string
+    required: true
+  - variable: persistence.claimName
+    default: "crawlappclaim"
+    description: "nfs claim"
+    type: string
+    required: true

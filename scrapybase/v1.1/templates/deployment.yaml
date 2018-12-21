@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "scrapybase.name" . }}
+  namespace: nscrawl
+  labels:
+    app: {{ template "scrapybase.name" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "nscrawl"
+    heritage: "{{ .Release.Service }}"
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "scrapybase.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "scrapybase.name" . }}
+    spec:
+      containers:
+      - name: {{ template "scrapybase.name" . }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        volumeMounts:
+        - mountPath: {{ .Values.persistence.mountPath }}
+          name: {{ .Values.persistence.mountName}}
+          subPath: {{ .Values.persistence.mountName}}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      volumes:
+      - name: {{ .Values.persistence.mountName}}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.claimName}}
