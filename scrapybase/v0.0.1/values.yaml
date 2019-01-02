@@ -1,7 +1,7 @@
 image:
   # registry: docker.io DISABLED
   repository: reg.bcc-agi.local/library/alpine-crawlbase
-  tag: scrapy0.2_20181220
+  tag: scrapy0.2_20181226
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images

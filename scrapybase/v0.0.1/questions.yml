@@ -17,7 +17,7 @@ questions:
     type: string
     label: Scrapybase Image Name
   - variable: image.tag
-    default: "scrapy0.2_20181220"
+    default: "scrapy0.2_20181226"
     description: "Scrapybase image tag"
     type: string
     label: ImaScrapybasege Tag

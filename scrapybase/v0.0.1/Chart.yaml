@@ -5,7 +5,6 @@ description: Local scrapy 0.2.46 base.
 keywords:
 - scrapy
 - nfs
-- demo
 home: https://github.com/642874367/helmcharts
 icon: http://172.16.25.88/Scrapybase.png
 sources:
